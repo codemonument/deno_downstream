@@ -1,5 +1,7 @@
 # Downstream
 
+**CAUTION: HIGHLY EXPERIMENTAL AT THE MOMENT!**
+
 A deno module for downloading files in a streaming fashion. 
 The base of this module is `downstream.ts`, which queries the file and returns the ReadableStream<UInt8Array>, 
 as well as a progress Stream in percent (from 0 to 100) (not included yet). 
