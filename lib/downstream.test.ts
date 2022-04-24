@@ -5,12 +5,9 @@ import {
   describe,
   it,
 } from "../dependencies/_testing.std.ts";
+import { ProgressBar } from "../dependencies/_progressbar.ts";
 import { downstream } from "../mod.ts";
-
-const File1GB = `https://speed.hetzner.de/1GB.bin`;
-const File100MB = `https://speed.hetzner.de/100MB.bin`;
-const File50MB = `http://ipv4.download.thinkbroadband.com/50MB.zip`;
-const File50MB404 = `https://speed.hetzner.de/50MB.bin`;
+import { File100MB, File1GB, File50MB404 } from "../test/testfiles.ts";
 
 /**
  * tc = (Deno) test context
@@ -38,15 +35,16 @@ describe(`'downstream'`, () => {
 
   it(`Reports Progress correctly`, async (tc) => {
     const { progressStream, closeStreams } = await downstream(File100MB);
-
     const progressEvents: string[] = [];
+    const progressBar = new ProgressBar({ title: "downloading: ", total: 100 });
+
     for await (const progress of progressStream) {
-      console.log(progress);
+      progressBar.render(Number.parseFloat(progress));
       progressEvents.push(progress);
     }
-    await closeStreams();
 
     await assertSnapshot(tc, progressEvents);
+    await closeStreams();
   });
 });
 
