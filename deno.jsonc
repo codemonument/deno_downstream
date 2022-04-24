@@ -4,6 +4,7 @@
     },
     "tasks": {
         "start": "deno run --unstable example/main.ts",
-        "test": "deno test --allow-net"
+        "test": "deno test --allow-net --allow-read",
+        "update-snapshots": "deno test --allow-net --allow-read --allow-write -- --update"
     }
 }
