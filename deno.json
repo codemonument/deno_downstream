@@ -1,8 +1,0 @@
-{
-    "compilerOptions": {
-        "strict": true
-    }, 
-    "tasks": {
-       "start": "deno run --unstable example/main.ts"
-    }
-}
