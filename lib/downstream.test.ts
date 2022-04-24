@@ -36,7 +36,7 @@ describe(`'downstream'`, () => {
     // assert(gb === 1);
   });
 
-  it.ignore(`Reports Progress correctly`, async (tc) => {
+  it(`Reports Progress correctly`, async (tc) => {
     const { progressStream, closeStreams } = await downstream(File100MB);
 
     const progressEvents: string[] = [];
