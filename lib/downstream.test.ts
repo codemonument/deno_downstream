@@ -19,8 +19,8 @@ describe(`'downstream' Function`, () => {
   it(`Reports Progress correctly`, async () => {
     const { progress, closeStreams } = await downstream(File100MB);
 
-    for await (const chunk of progress) {
-      console.log(chunk);
+    for await (const progressEvent of progress) {
+      console.log(progressEvent);
     }
 
     closeStreams();
