@@ -99,7 +99,7 @@ export default class ProgressBar {
    *   - `incomplete` - incomplete character, If you want to change at a certain moment. For example, it turns red at 20%
    */
   render(completed: number, options: renderOptions = {}): void {
-    if (this.isCompleted || !isTTY) return;
+    if (this.isCompleted) return;
 
     if (completed < 0) {
       throw new Error(`completed must greater than or equal to 0`);
