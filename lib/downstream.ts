@@ -12,7 +12,6 @@ export async function downstream(
   /**
    * start file download stream
    */
-
   const fileResponse = await fetch(input, options);
   if (fileResponse.status != 200) {
     throw new Deno.errors.Http(
@@ -24,7 +23,12 @@ export async function downstream(
     throw new Deno.errors.InvalidData(`The download response has no body!`);
   }
 
+  const contentLength = Number.parseInt(
+    fileResponse.headers.get("Content-Length") ?? "",
+  );
+
   return {
     body: fileResponse.body,
+    contentLength,
   };
 }
