@@ -1,4 +1,5 @@
 import { DownstreamResponse } from "./DownstreamResponse.ts";
+import { progressTransformer } from "./progressTransformer.ts";
 
 /**
  * A function for downloading a file and returning a readable stream
@@ -27,8 +28,11 @@ export async function downstream(
     fileResponse.headers.get("Content-Length") ?? "",
   );
 
+  const [bodyStream, bodyStreamClone] = fileResponse.body.tee();
+
   return {
-    body: fileResponse.body,
+    body: bodyStream,
     contentLength,
+    progress: bodyStreamClone.pipeThrough(progressTransformer),
   };
 }
