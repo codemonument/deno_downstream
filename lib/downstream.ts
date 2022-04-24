@@ -16,7 +16,7 @@ export async function downstream(
   const fileResponse = await fetch(input, options);
   if (fileResponse.status != 200) {
     // cleanup body stream!
-    fileResponse.body?.cancel();
+    await fileResponse.body?.cancel();
     throw new Deno.errors.Http(
       `status ${fileResponse.status}-'${fileResponse.statusText}' received instead of 200`,
     );
