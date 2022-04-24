@@ -1,15 +1,17 @@
 /**
  * Creates a Stream Transformer to convert a ReadableStream into a Progress Stream for the download progress in percent
- * @param bytes the byte count of the file download
+ * @param maxBytes the byte count of the file download
  */
-export function createProgressTransformer(bytes: number) {
+export function createProgressTransformer(maxBytes: number) {
+  let writtenBytes = 0;
   const progressTransformer = new TransformStream({
-    start(controller) {
-    },
+    start() {},
     transform(chunk, controller) {
+      writtenBytes += chunk.length;
+      const progressPercent = (writtenBytes / maxBytes) * 100;
+      controller.enqueue(progressPercent);
     },
-    flush(controller) {
-    },
+    flush() {},
   });
 
   return progressTransformer;
