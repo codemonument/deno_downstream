@@ -1,3 +1,4 @@
+import { Big, div, plus, round, times } from "../dependencies/_math.std.ts";
 export interface ProgressTransformerOptions {
   maxBytes: number;
 
@@ -11,19 +12,18 @@ export interface ProgressTransformerOptions {
 /**
  * Creates a Stream Transformer to convert a ReadableStream into a Progress Stream for the download progress in percent
  */
-export function createProgressTransformer(
+export function progressTransformer(
   { maxBytes, precision = 2 }: ProgressTransformerOptions,
 ) {
-  let writtenBytes = 0;
-  const progressTransformer = new TransformStream<Uint8Array, number>({
+  let writtenBytes = new Big("0");
+  const progressTransformer = new TransformStream<Uint8Array, string>({
     start() {},
     transform(chunk, controller) {
-      writtenBytes += chunk.length;
-      const progressPercent = (writtenBytes / maxBytes) * 100;
-      const progressWithPrecision = Number.parseFloat(
-        progressPercent.toFixed(precision),
-      );
-      controller.enqueue(progressWithPrecision);
+      writtenBytes = writtenBytes.plus(chunk.length);
+      const progressPercent = writtenBytes
+        .div(maxBytes)
+        .times("100");
+      controller.enqueue(progressPercent.round(precision).toString());
     },
     flush() {},
   });
