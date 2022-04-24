@@ -30,7 +30,7 @@ export async function downstream(
 
   const [bodyStream, bodyStreamClone] = fileResponse.body.tee();
   const progressStream = bodyStreamClone.pipeThrough(
-    createProgressTransformer(contentLength),
+    createProgressTransformer({ maxBytes: contentLength }),
   );
 
   return {
