@@ -1,5 +1,5 @@
 export interface DownstreamResponse {
-  body: ReadableStream<Uint8Array>;
+  fileStream: ReadableStream<Uint8Array>;
 
   /**
    * Contains the decimal number of bytes of the content,
@@ -15,7 +15,7 @@ export interface DownstreamResponse {
    * Reason for being string: The deno math package works on strings
    * to avoid precision errors with floating point math in js.
    */
-  progress: ReadableStream<string>;
+  progressStream: ReadableStream<string>;
 
   /**
    * Should be set to a method for closing the body and progress stream simultaneously
