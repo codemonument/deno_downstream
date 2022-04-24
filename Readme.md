@@ -31,11 +31,6 @@ or passing it to other streams, as I see fit.
 see `tasks` property in `deno.json`
 Run each key there with `deno task <task-key>`
 
-## Customize this repo 
+## Useful Links 
 
-- rename `my_module_part` folder to something which makes more sense for your deno module 
-- replace `my_module_part/startKia.ts` with a file which makes more sense for your deno module
-
-## Configure Deployments to deno.land/x 
-
-see https://deno.land/add_module
+- Big test files for testing these download functions: https://testfiledownload.com/
