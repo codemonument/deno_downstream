@@ -15,4 +15,14 @@ describe(`'downstream' Function`, () => {
     assert(gb === 1);
     result.closeStreams();
   });
+
+  it(`Reports Progress correctly`, async () => {
+    const { progress, closeStreams } = await downstream(File100MB);
+
+    for await (const chunk of progress) {
+      console.log(chunk);
+    }
+
+    closeStreams();
+  });
 });
