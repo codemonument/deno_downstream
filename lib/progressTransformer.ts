@@ -25,7 +25,9 @@ export function progressTransformer(
         .times("100");
       controller.enqueue(progressPercent.round(precision).toString());
     },
-    flush() {},
+    flush(controller) {
+      controller.terminate();
+    },
   });
 
   return progressTransformer;
