@@ -28,17 +28,17 @@ export async function downstream(
     fileResponse.headers.get("Content-Length") ?? "",
   );
 
-  const [bodyStream, bodyStreamClone] = fileResponse.body.tee();
-  const progressStream = bodyStreamClone.pipeThrough(
+  const [fileStream, fileStreamClone] = fileResponse.body.tee();
+  const progressStream = fileStreamClone.pipeThrough(
     progressTransformer({ maxBytes: contentLength }),
   );
 
   return {
-    body: bodyStream,
+    fileStream,
     contentLength,
-    progress: progressStream,
+    progressStream,
     closeStreams: () => {
-      bodyStream.cancel();
+      fileStream.cancel();
       progressStream.cancel();
     },
   };
