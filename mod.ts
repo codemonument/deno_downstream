@@ -3,4 +3,10 @@
  * which should be used by other people
  */
 
-export * from "./my_module_part/startKia.ts";
+export * from "./lib/downstream.ts";
+
+/**
+ * Export Types
+ */
+
+export * from "./lib/DownstreamResponse.ts";
