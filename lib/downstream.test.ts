@@ -8,6 +8,6 @@ describe(`'downstream' Function`, () => {
     const result = await downstream(File1GB);
     console.log(result.contentLength);
     assert(typeof result.contentLength === "number");
-    result.body.cancel();
+    result.closeStreams();
   });
 });
