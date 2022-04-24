@@ -9,6 +9,11 @@ import { ProgressBar } from "../dependencies/_progressbar.ts";
 import { downstream } from "../mod.ts";
 import { File100MB, File1GB, File50MB404 } from "../test/testfiles.ts";
 
+describe(`'downstream' Regression Tests`, () => {
+  it(`should not leak streams on http errors (like 404)`, () =>
+    assertRejects(() => downstream(File50MB404)));
+});
+
 /**
  * tc = (Deno) test context
  */
@@ -46,9 +51,4 @@ describe(`'downstream'`, () => {
     await assertSnapshot(tc, progressEvents);
     await closeStreams();
   });
-});
-
-describe(`'downstream' Regression Tests`, () => {
-  it.ignore(`should not leak streams on http errors (like 404)`, () =>
-    assertRejects(() => downstream(File50MB404)));
 });
