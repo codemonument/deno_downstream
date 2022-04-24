@@ -37,9 +37,9 @@ export async function downstream(
     fileStream,
     contentLength,
     progressStream,
-    closeStreams: () => {
-      fileStream.cancel();
-      progressStream.cancel();
+    closeStreams: async () => {
+      await fileStream.cancel();
+      await progressStream.cancel();
     },
   };
 }

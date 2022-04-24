@@ -20,5 +20,5 @@ export interface DownstreamResponse {
   /**
    * Should be set to a method for closing the body and progress stream simultaneously
    */
-  closeStreams: () => void;
+  closeStreams: () => Promise<void>;
 }
