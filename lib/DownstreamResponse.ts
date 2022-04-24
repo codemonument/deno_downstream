@@ -7,8 +7,9 @@ export interface DownstreamResponse {
    */
   contentLength: number;
 
-  // TODO: Figure out, how to implement a progress stream in percent
-  // see: https://medium.com/deno-the-complete-reference/readable-streams-in-deno-e5d707735a77
+  /**
+   * A progress stream in percent with fractions of a percent
+   */
   progress: ReadableStream<number>;
 
   /**
