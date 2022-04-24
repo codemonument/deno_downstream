@@ -34,3 +34,5 @@ Run each key there with `deno task <task-key>`
 ## Useful Links 
 
 - Big test files for testing these download functions: https://testfiledownload.com/
+- How to pipe streams in deno: https://deno.land/manual/examples/fetch_data#files-and-streams
+- Guide to Web Streams: https://web.dev/streams/#creating-a-transform-stream
