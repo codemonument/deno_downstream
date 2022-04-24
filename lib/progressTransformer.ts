@@ -4,7 +4,7 @@
  */
 export function createProgressTransformer(maxBytes: number) {
   let writtenBytes = 0;
-  const progressTransformer = new TransformStream({
+  const progressTransformer = new TransformStream<Uint8Array, number>({
     start() {},
     transform(chunk, controller) {
       writtenBytes += chunk.length;
