@@ -1,11 +1,14 @@
 export interface DownstreamResponse {
-  fileStream: ReadableStream<Uint8Array>;
-
   /**
    * Contains the decimal number of bytes of the content,
    * as sent by the HTTP Response header Content-Length
    */
   contentLength: number;
+
+  /**
+   * The Uint8Array Readable Stream for this file
+   */
+  fileStream: ReadableStream<Uint8Array>;
 
   /**
    * A progress stream in percent with fractions of a percent
