@@ -2,10 +2,10 @@ import {
   assert,
   assertRejects,
   assertSnapshot,
+  deadline,
   describe,
   it,
 } from "../dependencies/_testing.std.ts";
-import { ProgressBar } from "../dependencies/_progressbar.ts";
 import { downstream } from "../mod.ts";
 import {
   File100MB,
@@ -13,6 +13,7 @@ import {
   File50MB,
   File50MB404,
 } from "./_testutils/testfiles.ts";
+import { drainStream } from "./_testutils/drainStream.ts";
 
 // describe(`'downstream' Regression Tests`, () => {
 //   it(`should not leak streams on http errors (like 404)`, () =>
@@ -27,18 +28,46 @@ Deno.test(`'downstream' function`, async (tc) => {
     await assertRejects(async () => await downstream(File50MB404));
   });
 
-  await tc.step(`Closes Streams Correctly`, async () => {
+  /**
+   * Concrete Problem: test empties event loop before promises can resolve.
+   * https://github.com/denoland/deno/issues/13146
+   *
+   * How to solve that: A Timeout per test, to make the runtime wait the specified amount of time!
+   * Issue Thread for Solution:
+   * https://github.com/denoland/deno/issues/11133
+   *
+   * Quickfix: solve this with the `deadline` function
+   */
+  const testcase = async () => {
     const { closeStreams, fileStream, progressStream, contentLength } =
       await downstream(
         File50MB,
       );
 
     console.log(contentLength);
-    await closeStreams();
+    assert(contentLength);
+
+    await drainStream(fileStream);
+
+    // queueMicrotask(async () => await closeStreams());
+
+    // let counter = 0;
+    // const intervalId = setInterval(async () => {
+    //   console.log(`Demo Interval`);
+    //   counter += 1;
+
+    //   if (counter === 5) {
+    //     await closeStreams();
+    //     clearInterval(intervalId);
+    //   }
+    // }, 1000);
 
     // await fileStream.cancel();
     // await progressStream.cancel();
-  });
+    // await deadline(closeStreams(), 1000);
+  };
+
+  await tc.step(`Closes Streams Correctly`, testcase);
 });
 
 // describe(`'downstream' function`, () => {
