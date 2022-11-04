@@ -2,9 +2,6 @@ import {
   assert,
   assertRejects,
   assertSnapshot,
-  deadline,
-  describe,
-  it,
 } from "../dependencies/_testing.std.ts";
 import { downstream } from "../mod.ts";
 import {
@@ -14,11 +11,7 @@ import {
   File50MB404,
 } from "./_testutils/testfiles.ts";
 import { drainStream } from "./_testutils/drainStream.ts";
-
-// describe(`'downstream' Regression Tests`, () => {
-//   it(`should not leak streams on http errors (like 404)`, () =>
-//     assertRejects(() => downstream(File50MB404)));
-// });
+import { ProgressBar } from "../dependencies/_progressbar.ts";
 
 /**
  * tc = (Deno) test context
@@ -53,6 +46,21 @@ Deno.test(`'downstream' function`, async (tc) => {
     const mb = kb / 1024;
     assert(mb === 50); // the 50MB testfile consists of 50MB
 
+    // needs to be done to not crash deno test
+    await drainStream(fileStream);
+  });
+
+  await tc.step(`Reports Progress correctly`, async () => {
+    const { progressStream, fileStream } = await downstream(File100MB);
+    const progressEvents: string[] = [];
+    const progressBar = new ProgressBar({ title: "downloading: ", total: 100 });
+
+    for await (const progress of progressStream) {
+      progressBar.render(Number.parseFloat(progress));
+      progressEvents.push(progress);
+    }
+
+    await assertSnapshot(tc, progressEvents.length);
     // needs to be done to not crash deno test
     await drainStream(fileStream);
   });
