@@ -7,21 +7,26 @@ import {
 } from "../dependencies/_testing.std.ts";
 import { ProgressBar } from "../dependencies/_progressbar.ts";
 import { downstream } from "../mod.ts";
-import { File100MB, File1GB, File50MB404 } from "../test/testfiles.ts";
+import {
+  File100MB,
+  File1GB,
+  File50MB,
+  File50MB404,
+} from "./_testutils/testfiles.ts";
 
-describe(`'downstream' Regression Tests`, () => {
-  it(`should not leak streams on http errors (like 404)`, () =>
-    assertRejects(() => downstream(File50MB404)));
-});
+// describe(`'downstream' Regression Tests`, () => {
+//   it(`should not leak streams on http errors (like 404)`, () =>
+//     assertRejects(() => downstream(File50MB404)));
+// });
 
 /**
  * tc = (Deno) test context
  */
 describe(`'downstream'`, () => {
-  it.ignore("returns content size correctly", async () => {
+  it("returns content size correctly", async () => {
     try {
       const { closeStreams, fileStream, progressStream } = await downstream(
-        File1GB,
+        File50MB,
       );
       await closeStreams();
 
