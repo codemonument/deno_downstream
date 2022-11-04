@@ -9,4 +9,4 @@ export * from "./lib/downstream.ts";
  * Export Types
  */
 
-export * from "./lib/DownstreamResponse.ts";
+export * from "./lib/DownstreamResponse.d.ts";
