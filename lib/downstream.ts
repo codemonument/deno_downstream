@@ -14,7 +14,7 @@ export async function downstream(
    * start file download stream
    */
   const fileResponse = await fetch(input, options);
-  if (fileResponse.status !== 200) {
+  if (fileResponse.status < 200 || fileResponse.status >= 300) {
     // cleanup body stream!
     await fileResponse.body?.cancel();
     throw new Deno.errors.Http(
