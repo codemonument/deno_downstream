@@ -64,4 +64,19 @@ Deno.test(`'downstream' function`, async (tc) => {
     // needs to be done to not crash deno test
     await drainStream(fileStream);
   });
+
+  await tc.step(`Reports Progress on big file (1GB) correctly`, async () => {
+    const { progressStream, fileStream } = await downstream(File1GB);
+    const progressEvents: string[] = [];
+    const progressBar = new ProgressBar({ title: "downloading: ", total: 100 });
+
+    for await (const progress of progressStream) {
+      progressBar.render(Number.parseFloat(progress));
+      progressEvents.push(progress);
+    }
+
+    await assertSnapshot(tc, progressEvents.length);
+    // needs to be done to not crash deno test
+    await drainStream(fileStream);
+  });
 });
