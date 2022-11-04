@@ -1,4 +1,4 @@
-import { DownstreamResponse } from "./DownstreamResponse.ts";
+import { DownstreamResponse } from "./DownstreamResponse.d.ts";
 import { progressTransformer } from "./progressTransformer.ts";
 
 /**

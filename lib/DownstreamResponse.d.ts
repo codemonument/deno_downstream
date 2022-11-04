@@ -1,4 +1,4 @@
-export interface DownstreamResponse {
+export type DownstreamResponse = {
   /**
    * Contains the decimal number of bytes of the content,
    * as sent by the HTTP Response header Content-Length
@@ -24,4 +24,4 @@ export interface DownstreamResponse {
    * Should be set to a method for closing the body and progress stream simultaneously
    */
   closeStreams: () => Promise<void>;
-}
+};
