@@ -22,7 +22,8 @@ export async function downstream(
     );
   }
 
-  if (!fileResponse.body) {
+  const responseStream = fileResponse.body;
+  if (!responseStream) {
     throw new Deno.errors.InvalidData(`The download response has no body!`);
   }
 
@@ -30,7 +31,7 @@ export async function downstream(
     fileResponse.headers.get("Content-Length") ?? "",
   );
 
-  const [fileStream, fileStreamClone] = fileResponse.body.tee();
+  const [fileStream, fileStreamClone] = responseStream.tee();
   const progressStream = fileStreamClone.pipeThrough(
     progressTransformer({ maxBytes: contentLength }),
   );
