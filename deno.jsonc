@@ -8,4 +8,5 @@
         "test": "deno test --allow-net --allow-read",
         "update-snapshots": "deno test --allow-net --allow-read --allow-write -- --update"
     }
+    // NOTE: DON'T use an importMap for a library, since this will NOT be resolved automatically when using the lib!
 }
