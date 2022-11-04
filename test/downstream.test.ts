@@ -28,46 +28,20 @@ Deno.test(`'downstream' function`, async (tc) => {
     await assertRejects(async () => await downstream(File50MB404));
   });
 
-  /**
-   * Concrete Problem: test empties event loop before promises can resolve.
-   * https://github.com/denoland/deno/issues/13146
-   *
-   * How to solve that: A Timeout per test, to make the runtime wait the specified amount of time!
-   * Issue Thread for Solution:
-   * https://github.com/denoland/deno/issues/11133
-   *
-   * Quickfix: solve this with the `deadline` function
-   */
-  const testcase = async () => {
-    const { closeStreams, fileStream, progressStream, contentLength } =
-      await downstream(
-        File50MB,
-      );
+  await tc.step(`Runs tests correctly (consuming streams)`, async () => {
+    const { closeStreams, fileStream, contentLength } = await downstream(
+      File50MB,
+    );
 
-    console.log(contentLength);
-    assert(contentLength);
+    assert(typeof contentLength === "number");
+    assert(contentLength > 0);
 
     await drainStream(fileStream);
 
-    // queueMicrotask(async () => await closeStreams());
-
-    // let counter = 0;
-    // const intervalId = setInterval(async () => {
-    //   console.log(`Demo Interval`);
-    //   counter += 1;
-
-    //   if (counter === 5) {
-    //     await closeStreams();
-    //     clearInterval(intervalId);
-    //   }
-    // }, 1000);
-
-    // await fileStream.cancel();
-    // await progressStream.cancel();
-    // await deadline(closeStreams(), 1000);
-  };
-
-  await tc.step(`Closes Streams Correctly`, testcase);
+    // This doesn't work for some reason
+    // TODO: => why do I not have to close the progressStream after draining the fileStream???
+    // await closeStreams();
+  });
 });
 
 // describe(`'downstream' function`, () => {
