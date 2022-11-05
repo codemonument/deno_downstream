@@ -3,7 +3,7 @@ import { simpleStreamCallback } from "@mod";
 
 export type ProgressRow = {
   name: string;
-  readableStream: ReadableStream<string>;
+  readableStream: ReadableStream<string> | ReadableStream<number>;
 };
 
 export type MultiProgressCliRendererOptions = {
@@ -42,8 +42,11 @@ export class MultiProgressCliRenderer {
 
     progressRows.map(async (row, index) => {
       await row.readableStream.pipeTo(
-        simpleStreamCallback((progress: string) => {
-          this.progressState[index].completed = Number.parseFloat(progress);
+        simpleStreamCallback((progress: string | number) => {
+          const completed = (typeof progress === "number")
+            ? progress
+            : Number.parseFloat(progress);
+          this.progressState[index].completed = completed;
           this.multibar.render(this.progressState);
         }),
       );
