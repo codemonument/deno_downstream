@@ -24,11 +24,35 @@
  * Real Fix: Simply consume the open stream!!!!
  * => Therefore: This drainStream Function
  */
-export async function drainStream(stream: ReadableStream) {
+
+export async function drainStream(stream: ReadableStream): Promise<void> {
+  await drainStreamToTempFile(stream);
+}
+
+/**
+ * @param stream WARNING! Keeps chunks in memory!
+ * => better use drainStreamToTempFile()!
+ */
+export async function drainStreamInMemory(
+  stream: ReadableStream,
+): Promise<void> {
+  // Manual stream drainig technique
   const reader = stream.getReader();
   let chunk = await reader.read();
   while (chunk.done !== true) {
     // console.log(chunk);
     chunk = await reader.read();
   }
+}
+
+export async function drainStreamToTempFile(
+  stream: ReadableStream,
+): Promise<void> {
+  const tempFilePath = await Deno.makeTempFile();
+  const tempFile = await Deno.open(tempFilePath, { write: true });
+
+  // Draining a stream to a temp file reduces memory usage on the deno test runner!
+  await stream.pipeTo(tempFile.writable);
+  tempFile.close();
+  await Deno.remove(tempFilePath);
 }
