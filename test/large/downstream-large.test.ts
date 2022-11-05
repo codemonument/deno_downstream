@@ -3,11 +3,11 @@
  * Excluded from the other downstream test file to not have to wait for that long every time.
  */
 
-import { ProgressBar } from "../dependencies/_progressbar.ts";
-import { assertSnapshot } from "../dependencies/_testing.std.ts";
-import { downstream } from "../mod.ts";
-import { drainStream } from "./_testutils/drainStream.ts";
-import { File1GB } from "./_testutils/testfiles.ts";
+import { downstream } from "@mod";
+import { ProgressBar } from "@deps/_progressbar.ts";
+import { assertSnapshot } from "@deps/_testing.std.ts";
+import { drainStream } from "@test/_testutils/drainStream.ts";
+import { File1GB } from "@test/_testutils/testfiles.ts";
 
 Deno.test(`Demo Test`, async (tc) => {
   /**

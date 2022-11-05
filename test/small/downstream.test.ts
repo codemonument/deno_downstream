@@ -1,12 +1,12 @@
+import { assert, assertRejects, assertSnapshot } from "@deps/_testing.std.ts";
+import { downstream } from "@mod";
 import {
-  assert,
-  assertRejects,
-  assertSnapshot,
-} from "../dependencies/_testing.std.ts";
-import { downstream } from "../mod.ts";
-import { File100MB, File50MB, File50MB404 } from "./_testutils/testfiles.ts";
-import { drainStream } from "./_testutils/drainStream.ts";
-import { ProgressBar } from "../dependencies/_progressbar.ts";
+  File100MB,
+  File50MB,
+  File50MB404,
+} from "@test/_testutils/testfiles.ts";
+import { drainStream } from "@test/_testutils/drainStream.ts";
+import { ProgressBar } from "@deps/_progressbar.ts";
 
 /**
  * tc = (Deno) test context
