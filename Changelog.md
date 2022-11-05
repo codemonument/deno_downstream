@@ -1,5 +1,9 @@
 # Changelog 
 
+## 0.3.1 - 2022-11-05 
+
+- Add `title` option to `simpleProgressCliRenderer`
+
 ## 0.3.0 - 2022-11-05 
 
 - Add streamAdapter: simpleStreamCallback => A WritableStream which can be used to pipe another stream into and get access to the chunks in a callback function
