@@ -5,9 +5,9 @@ export type ChunkCallback<T> = (
   chunk: T,
 ) => void;
 
-export function simpleStreamCallback<T>(
-  progressCallback: ChunkCallback<T>,
-): WritableStream {
+export function simpleStreamCallback<InputType>(
+  progressCallback: ChunkCallback<InputType>,
+): WritableStream<InputType> {
   return new WritableStream({
     start(_controller) {
       // do init logic, if needed
