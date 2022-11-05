@@ -6,8 +6,8 @@
 import { downstream } from "@mod";
 import { ProgressBar } from "@deps/_progressbar.ts";
 import { assertSnapshot } from "@deps/_testing.std.ts";
-import { drainStream } from "@test/_testutils/drainStream.ts";
-import { File1GB } from "@test/_testutils/testfiles.ts";
+import { drainStream } from "@testutils/drainStream.ts";
+import { File1GB } from "@testutils/testfiles.ts";
 
 Deno.test(`Demo Test`, async (tc) => {
   /**

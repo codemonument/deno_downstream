@@ -2,6 +2,7 @@
   "imports": {
     "@mod": "./mod.ts",
     "@deps/": "./dependencies/",
-    "@test/": "./test/"
+    "@test/": "./test/",
+    "@testutils/": "./test/_testutils/"
   }
 }

@@ -1,11 +1,7 @@
 import { assert, assertRejects, assertSnapshot } from "@deps/_testing.std.ts";
 import { downstream } from "@mod";
-import {
-  File100MB,
-  File50MB,
-  File50MB404,
-} from "@test/_testutils/testfiles.ts";
-import { drainStream } from "@test/_testutils/drainStream.ts";
+import { File100MB, File50MB, File50MB404 } from "@testutils/testfiles.ts";
+import { drainStream } from "@testutils/drainStream.ts";
 import { ProgressBar } from "@deps/_progressbar.ts";
 
 /**
