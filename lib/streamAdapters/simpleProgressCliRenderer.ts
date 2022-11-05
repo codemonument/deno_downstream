@@ -28,7 +28,7 @@ export function simpleProgressCliRenderer(
     start(_controller) {
       // do init logic, if needed
     },
-    write(progress, _controller) {
+    write(progress: string, _controller) {
       progressBar.render(Number.parseFloat(progress));
     },
     close() {
