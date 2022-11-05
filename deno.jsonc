@@ -9,8 +9,8 @@
         "test": "deno test --allow-net --allow-read --allow-write",
         // updates snapshot files
         "testu": "deno test --allow-net --allow-read --allow-write -- --update", 
-        "downstream": "deno task test -- test/downstream.test.ts",
-        "downstream-large": "deno task test -- test/downstream-large.test.ts"
+        "test-small": "deno test --allow-net --allow-read --allow-write test/small/",
+        "test-large": "deno test --allow-net --allow-read --allow-write test/large/"
     },
     // NOTE: DON'T use an importMap for a library, since this will NOT be resolved automatically when using the lib!
     // Update: Use importMap only for testing! :) 
