@@ -14,5 +14,5 @@
     },
     // NOTE: DON'T use an importMap for a library, since this will NOT be resolved automatically when using the lib!
     // Update: Use importMap only for testing! :) 
-    "importMap": "imort_map.json"
+    "importMap": "import_map.json"
 }
