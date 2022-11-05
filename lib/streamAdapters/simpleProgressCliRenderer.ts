@@ -28,8 +28,11 @@ export function simpleProgressCliRenderer(
     start(_controller) {
       // do init logic, if needed
     },
-    write(progress: string, _controller) {
-      progressBar.render(Number.parseFloat(progress));
+    write(progress: string | number, _controller) {
+      const completed = (typeof progress === "number")
+        ? progress
+        : Number.parseFloat(progress);
+      progressBar.render(completed);
     },
     close() {
     },
