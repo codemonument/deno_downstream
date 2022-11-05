@@ -1,5 +1,10 @@
 # Changelog 
 
+## 0.3.0 - 2022-11-05 
+
+- Add streamAdapter: simpleStreamCallback => A WritableStream which can be used to pipe another stream into and get access to the chunks in a callback function
+- Add streamAdapter: simpleProgressCliRenderer => A WritableStream which can be used to pipe a progress stream to render it on the cli
+
 ## 0.2.0 - 2022-11-05 
 
 - add the implementation for the `progressStream: ReadableStream<string>;` property on the DownstreamResponse object
