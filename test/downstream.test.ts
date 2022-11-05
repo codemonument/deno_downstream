@@ -65,6 +65,10 @@ Deno.test(`'downstream' function`, async (tc) => {
     await drainStream(fileStream);
   });
 
+  /**
+   * Problem: Still full 1GB File in Memory!
+   * https://github.com/denoland/deno/issues/16544
+   */
   await tc.step(`Reports Progress on big file (1GB) correctly`, async () => {
     const { progressStream, fileStream } = await downstream(File1GB);
     const progressEvents: string[] = [];
