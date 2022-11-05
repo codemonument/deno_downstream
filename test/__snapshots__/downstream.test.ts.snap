@@ -2,4 +2,4 @@ export const snapshot = {};
 
 snapshot[`'downstream' function 1`] = `6401`;
 
-snapshot[`'downstream' function 2`] = `64001`;
+snapshot[`'downstream' function 2`] = `64000`;
