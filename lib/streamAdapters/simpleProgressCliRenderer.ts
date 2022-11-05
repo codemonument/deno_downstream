@@ -1,7 +1,28 @@
 import { ProgressBar } from "../../dependencies/_progressbar.ts";
 
-export function simpleProgressCliRenderer() {
-  const progressBar = new ProgressBar({ title: "downloading: ", total: 100 });
+export type SimpleProgressCliRendererOptions = {
+  /**
+   * The title of the progressbar
+   */
+  title?: string;
+};
+
+const defaultOptions: SimpleProgressCliRendererOptions = {
+  title: "downloading: ",
+};
+
+export function simpleProgressCliRenderer(
+  options?: SimpleProgressCliRendererOptions,
+) {
+  // sanitize input options
+  if (!options) {
+    options = defaultOptions;
+  } else {
+    options = { ...defaultOptions, ...options };
+  }
+
+  const { title } = options;
+  const progressBar = new ProgressBar({ title, total: 100 });
 
   return new WritableStream({
     start(_controller) {
