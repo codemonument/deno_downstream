@@ -1,5 +1,6 @@
 {
   "imports": {
+    "@mod": "./mod.ts",
     "@deps/": "./dependencies/",
     "@test/": "./test/"
   }
