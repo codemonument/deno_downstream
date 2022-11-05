@@ -53,6 +53,8 @@ export async function drainStreamToTempFile(
 
   // Draining a stream to a temp file reduces memory usage on the deno test runner!
   await stream.pipeTo(tempFile.writable);
-  tempFile.close();
+
+  // file closing not necessary, since pipeTo already closes the file
+  // tempFile.close();
   await Deno.remove(tempFilePath);
 }
