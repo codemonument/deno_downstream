@@ -11,6 +11,7 @@ export * from "./lib/progressTransformer.ts";
  */
 export * from "./lib/streamAdapters/simpleStreamCallback.ts";
 export * from "./lib/streamAdapters/simpleProgressCliRenderer.ts";
+export * from "./lib/streamAdapters/MultiProgressCliRenderer.ts";
 
 /**
  * Export Types
