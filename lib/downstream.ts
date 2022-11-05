@@ -5,6 +5,12 @@ import { progressTransformer } from "./progressTransformer.ts";
  * A function for downloading a file and returning a readable stream
  * allows to decouple downloading from further processing
  * (writing to file, sending to another network stream, etc.)
+ *
+ * CAUTION: These streams are currently buffered in memory!
+ * I tested this with up to 1GB filesize, which does not crash,
+ * but adds exactly this 1GB to the memory usage of the deno process using this function.
+ *
+ * Open issue: https://github.com/denoland/deno/issues/16544
  */
 export async function downstream(
   input: string | Request,
