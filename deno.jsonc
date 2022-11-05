@@ -9,6 +9,7 @@
         "test": "deno test --allow-net --allow-read --allow-write",
         // updates snapshot files
         "testu": "deno test --allow-net --allow-read --allow-write -- --update", 
+        "test-units": "deno test --allow-net --allow-read --allow-write test/units/",
         "test-small": "deno test --allow-net --allow-read --allow-write test/small/",
         "test-large": "deno test --allow-net --allow-read --allow-write test/large/"
     },
