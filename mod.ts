@@ -4,6 +4,7 @@
  */
 
 export * from "./lib/downstream.ts";
+export * from "./lib/progressTransformer.ts";
 
 /**
  * Export all writeableStreams which can be used as targets for other streams
