@@ -3,17 +3,17 @@
  */
 export type ChunkCallback<T> = (
   chunk: T,
-) => void | Promise<void>;
+) => void;
 
-export function streamToCallback<T>(
+export function simpleStreamCallback<T>(
   progressCallback: ChunkCallback<T>,
 ): WritableStream {
   return new WritableStream({
     start(_controller) {
       // do init logic, if needed
     },
-    async write(_chunk, _controller) {
-      await progressCallback(_chunk);
+    write(_chunk, _controller) {
+      progressCallback(_chunk);
     },
     close() {
     },
