@@ -1,11 +1,7 @@
-/**
- * Local Fork to try to use it in deno test (which does not have a tti by default)
- */
-
 import { bgGreen, bgWhite, writeAllSync } from "./deps.ts";
 export { MultiProgressBar } from "./multi.ts";
 
-const isTTY = Deno.isatty(Deno.stdout.rid);
+const hasStdout = Deno.stdout;
 const isWindow = Deno.build.os === "windows";
 
 const enum Direction {
@@ -48,7 +44,6 @@ export default class ProgressBar {
   private isCompleted = false;
   private lastStr = "";
   private start = Date.now();
-  private time?: string;
   private lastRender = 0;
   private encoder = new TextEncoder();
 
@@ -99,7 +94,7 @@ export default class ProgressBar {
    *   - `incomplete` - incomplete character, If you want to change at a certain moment. For example, it turns red at 20%
    */
   render(completed: number, options: renderOptions = {}): void {
-    if (this.isCompleted) return;
+    if (this.isCompleted || !hasStdout) return;
 
     if (completed < 0) {
       throw new Error(`completed must greater than or equal to 0`);
@@ -111,14 +106,20 @@ export default class ProgressBar {
     if (ms < this.interval && completed < total) return;
 
     this.lastRender = now;
-    this.time = ((now - this.start) / 1000).toFixed(1) + "s";
+    const time = ((now - this.start) / 1000).toFixed(1) + "s";
+    const eta = completed == 0
+      ? "-"
+      : ((completed >= total)
+        ? 0
+        : (total / completed - 1) * (now - this.start) / 1000).toFixed(1) + "s";
 
     const percent = ((completed / total) * 100).toFixed(2) + "%";
 
     // :title :percent :bar :time :completed/:total
     let str = this.display
       .replace(":title", options.title ?? this.title)
-      .replace(":time", this.time)
+      .replace(":time", time)
+      .replace(":eta", eta)
       .replace(":percent", percent)
       .replace(":completed", completed + "")
       .replace(":total", total + "");
@@ -156,6 +157,10 @@ export default class ProgressBar {
     ).fill(options.incomplete ?? this.incomplete).join("");
 
     str = str.replace(":bar", complete + precise + incomplete);
+
+    if (str.length < this.lastStr.length) {
+      str += " ".repeat(this.lastStr.length - str.length);
+    }
 
     if (str !== this.lastStr) {
       this.write(str);
