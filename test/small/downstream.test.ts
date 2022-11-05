@@ -42,9 +42,10 @@ Deno.test(`'downstream' function`, async (tc) => {
   });
 
   await tc.step(`Reports Progress correctly`, async () => {
+    const progressBar = new ProgressBar({ title: "downloading: ", total: 100 });
+
     const { progressStream, fileStream } = await downstream(File100MB);
     const progressEvents: string[] = [];
-    const progressBar = new ProgressBar({ title: "downloading: ", total: 100 });
 
     for await (const progress of progressStream) {
       progressBar.render(Number.parseFloat(progress));
