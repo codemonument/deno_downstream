@@ -4,3 +4,4 @@
 // export { default as ProgressBar } from "./progress-fork/mod.ts";
 
 export * from "https://deno.land/x/progress@v1.2.8/mod.ts";
+export { default as ProgressBar } from "https://deno.land/x/progress@v1.2.8/mod.ts";
