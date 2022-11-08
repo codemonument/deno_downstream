@@ -1,5 +1,10 @@
 # Changelog 
 
+## 0.3.2 - 2022-1108 
+
+- Update `progressbar` dependency to 1.3.3 (fixes availability in `deno test`)
+  - Note: There is still a bug on MultiProgressBar on MacOS: https://github.com/deno-library/progress/issues/15
+
 ## 0.3.1 - 2022-11-05 
 
 - Add `title` option to `simpleProgressCliRenderer`
