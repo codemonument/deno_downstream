@@ -1,17 +1,17 @@
 import { simpleProgressCliRenderer } from "@mod";
-import { simpleTimerStream } from "@deps/simpleTimerStream.ts";
+import { timerSource } from "@deps/rx_webstreams.ts";
 
 // Deno.test(``, async () => {});
 
 Deno.test(`Should output a simple progress bar`, async () => {
-  await simpleTimerStream({ maxEventCount: 100, intervalInMilliseconds: 25 })
+  await timerSource({ maxEventCount: 100, intervalInMilliseconds: 25 })
     .pipeTo(
       simpleProgressCliRenderer(),
     );
 });
 
 Deno.test(`Should accept a custom title for the progressbar`, async () => {
-  await simpleTimerStream({
+  await timerSource({
     maxEventCount: 100,
     intervalInMilliseconds: 25,
   })
