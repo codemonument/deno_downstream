@@ -1,5 +1,5 @@
 import { MultiProgressBar } from "../../dependencies/_progressbar.ts";
-import { simpleStreamCallback } from "@mod";
+import { simpleCallbackTarget } from "@mod";
 
 export type ProgressRow = {
   name: string;
@@ -42,7 +42,7 @@ export class MultiProgressCliRenderer {
 
     progressRows.map(async (row, index) => {
       await row.readableStream.pipeTo(
-        simpleStreamCallback((progress: string | number) => {
+        simpleCallbackTarget((progress: string | number) => {
           const completed = (typeof progress === "number")
             ? progress
             : Number.parseFloat(progress);
