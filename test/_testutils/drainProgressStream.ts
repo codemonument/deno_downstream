@@ -1,4 +1,4 @@
-import { ProgressBar } from "../../dependencies/_progressbar.ts";
+import { ProgressBar } from "../../deps/_progressbar.ts";
 
 export async function drainProgressStream(stream: ReadableStream<string>) {
   const progressBar = new ProgressBar({

@@ -15,7 +15,7 @@ export * from "./lib/streamAdapters/MultiProgressCliRenderer.ts";
 /**
  * Re-Export Stream Helpers
  */
-export { simpleCallbackTarget } from "./dependencies/rx_webstreams.ts";
+export { simpleCallbackTarget } from "./deps/rx_webstreams.ts";
 
 /**
  * Export Types

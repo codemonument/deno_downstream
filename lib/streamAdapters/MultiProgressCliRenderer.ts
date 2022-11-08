@@ -1,4 +1,4 @@
-import { MultiProgressBar } from "../../dependencies/_progressbar.ts";
+import { MultiProgressBar } from "../../deps/_progressbar.ts";
 import { simpleCallbackTarget } from "@mod";
 
 export type ProgressRow = {

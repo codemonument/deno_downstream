@@ -1,4 +1,4 @@
-import { ProgressBar } from "../../dependencies/_progressbar.ts";
+import { ProgressBar } from "../../deps/_progressbar.ts";
 
 export type SimpleProgressCliRendererOptions = {
   /**

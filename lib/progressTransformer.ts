@@ -1,4 +1,4 @@
-import { Big, div, plus, round, times } from "../dependencies/_math.std.ts";
+import { Big, div, plus, round, times } from "../deps/_math.std.ts";
 export interface ProgressTransformerOptions {
   maxBytes: number;
 

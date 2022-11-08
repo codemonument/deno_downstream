@@ -1,6 +1,6 @@
-import { ProgressBar } from "../dependencies/_progressbar.ts";
-import { downstream } from "../mod.ts";
-import { File100MB } from "../test/testfiles.ts";
+import { ProgressBar } from "@deps/_progressbar.ts";
+import { downstream } from "@mod";
+import { File100MB } from "@testutils/testfiles.ts";
 
 const { progressStream, closeStreams } = await downstream(File100MB);
 const progressEvents: string[] = [];
