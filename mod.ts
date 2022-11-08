@@ -9,9 +9,13 @@ export * from "./lib/progressTransformer.ts";
 /**
  * Export all writeableStreams which can be used as targets for other streams
  */
-export * from "./lib/streamAdapters/simpleStreamCallback.ts";
 export * from "./lib/streamAdapters/simpleProgressCliRenderer.ts";
 export * from "./lib/streamAdapters/MultiProgressCliRenderer.ts";
+
+/**
+ * Re-Export Stream Helpers
+ */
+export { simpleCallbackTarget } from "./dependencies/rx_webstreams.ts";
 
 /**
  * Export Types
