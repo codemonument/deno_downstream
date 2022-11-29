@@ -42,6 +42,7 @@
     "https://deno.land/std@0.162.0/testing/asserts.ts": "1e340c589853e82e0807629ba31a43c84ebdcdeca910c4a9705715dfdb0f5ce8",
     "https://deno.land/std@0.162.0/testing/bdd.ts": "35060cefd9cc21b414f4d89453b3551a3d52ec50aeff25db432503c5485b2f72",
     "https://deno.land/std@0.162.0/testing/snapshot.ts": "33fdde49f8797742a96d95553bd5282bbcf1b76c5494c7513a2958cc18423db1",
+    "https://deno.land/x/chart@1.0.1/mod.ts": "458e2c5b37399ecbbb3ce484a9fbc4b4fc08523571ad44f656437ca558fab0ad",
     "https://deno.land/x/math@v1.1.0/abs.ts": "d64fe603ae4bb57037f06a1a5004285b99ed016dab6bfcded07c8155efce24b7",
     "https://deno.land/x/math@v1.1.0/big/big.d.ts": "34794a7d39c9c6e1ff28f395b4c9c1e0ca741e90463263ce6ae503aa39014ed2",
     "https://deno.land/x/math@v1.1.0/big/mod.ts": "ba561f56a24ecc9f03542693ed0c81166ed0c921f8017d220ec70c963e935509",
