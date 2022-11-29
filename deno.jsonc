@@ -1,6 +1,9 @@
 {
     "compilerOptions": {
-        "strict": true
+        "strict": true, 
+        "lib": [
+            "deno.window"
+        ]
     },
     "tasks": {
         "start": "deno run --unstable example/main.ts",
