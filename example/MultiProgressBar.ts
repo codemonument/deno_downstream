@@ -6,6 +6,7 @@ const multibar = new MultiProgressBar({
   title: "Multi-Progress Bars",
   complete: "=",
   incomplete: "-",
+  interval: 1,
   display: "[:bar] :text :percent :time :completed/:total",
 });
 
@@ -13,19 +14,21 @@ multibar.render([
   { text: "progress_1", completed: 1 },
 ]);
 
-// sleep(1);
+await sleep(0.002);
 
 multibar.render([
   { text: "progress_1", completed: 2 },
   { text: "progress_2", completed: 1 },
 ]);
 
-// sleep(1);
+await sleep(0.002);
 
 multibar.render([
   { text: "progress_1", completed: 2 },
   { text: "progress_2", completed: 2 },
 ]);
+
+await sleep(0.002);
 
 multibar.render([
   { text: "progress_1", completed: 3 },
