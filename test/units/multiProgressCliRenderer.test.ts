@@ -1,4 +1,4 @@
-import { simpleProgressCliRenderer } from "@mod";
+import { multiProgressCliRenderer, simpleProgressCliRenderer } from "@mod";
 import {
   map,
   multiplexSource,
@@ -39,9 +39,12 @@ Deno.test(`Should output multiple progress bars`, async () => {
         }))
       ),
     )
-    .pipeTo(simpleCallbackTarget(
-      (chunk) => console.log(chunk),
-    ));
+    .pipeTo(
+      //   simpleCallbackTarget(
+      //   (chunk) => console.log(chunk),
+      // )
+      multiProgressCliRenderer(),
+    );
 
   await pipeToPromise;
 });
