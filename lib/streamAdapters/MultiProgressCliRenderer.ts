@@ -1,3 +1,4 @@
+import { sleep } from "../../deps/sleep.ts";
 import { MultiProgressBar } from "../../deps/_progressbar.ts";
 
 export type MultiProgressState = Array<
@@ -14,6 +15,7 @@ export function multiProgressCliRenderer() {
     title: "Multi-Progress Bars",
     complete: "=",
     incomplete: "-",
+    interval: 1,
     display: "[:bar] :text :percent :time :completed/:total",
   });
 
@@ -21,7 +23,8 @@ export function multiProgressCliRenderer() {
     start(_controller) {
       // do init logic, if needed
     },
-    write(state: MultiProgressState, _controller) {
+    async write(state: MultiProgressState, _controller) {
+      await sleep(0.002);
       multibar.render(state);
     },
     close() {

@@ -10,7 +10,7 @@ import {
 // Deno.test(``, async () => {});
 
 const mockProgressSource = () =>
-  timerSource({ maxEventCount: 100, intervalInMilliseconds: 25 });
+  timerSource({ maxEventCount: 100, intervalInMilliseconds: 50 });
 
 Deno.test(`Should output multiple progress bars`, async () => {
   const pipeToPromise = multiplexSource([{
@@ -40,9 +40,11 @@ Deno.test(`Should output multiple progress bars`, async () => {
       ),
     )
     .pipeTo(
-      //   simpleCallbackTarget(
-      //   (chunk) => console.log(chunk),
-      // )
+      // simpleCallbackTarget(
+      //   (chunk) => {
+      //     if (chunk.length < 3) console.log(chunk);
+      //   },
+      // ),
       multiProgressCliRenderer(),
     );
 
