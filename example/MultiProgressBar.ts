@@ -1,4 +1,5 @@
-import { MultiProgressBar } from "@deps/_progressbar.ts";
+// import { MultiProgressBar } from "@deps/_progressbar.ts";
+import { MultiProgressBar } from "https://deno.land/x/progress@v1.3.7/mod.ts";
 import { sleep } from "https://deno.land/x/sleep/mod.ts";
 
 const multibar = new MultiProgressBar({
