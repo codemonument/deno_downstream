@@ -1,8 +1,10 @@
 # Changelog
 
-## 0.3.2 - 2023-06-10 (WIP)
+## 0.3.3 - 2023-06-10
 
 - Improving memory usage measurement for downloading 1 GB file
+- Add a test for downloading a 10 GB file
+- Improve Readme
 
 ## 0.3.2 - 2022-11-08
 
