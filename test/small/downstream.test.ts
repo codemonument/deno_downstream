@@ -12,21 +12,21 @@ Deno.test(`'downstream' function`, async (tc) => {
     await assertRejects(async () => await downstream(File50MB404));
   });
 
-  await tc.step(`Runs tests correctly (consuming streams)`, async () => {
-    const { fileStream, contentLength } = await downstream(
-      File50MB,
-    );
+  await tc.step(
+    `Simple streaming download and ignoring the progressStream`,
+    async () => {
+      const { fileStream, contentLength } = await downstream(
+        "http://ipv4.download.thinkbroadband.com/50MB.zip",
+      );
 
-    assert(typeof contentLength === "number");
-    assert(contentLength > 0);
+      assert(typeof contentLength === "number");
+      assert(contentLength > 0);
 
-    // needs to be done to not crash deno test
-    await drainStream(fileStream);
-
-    // This doesn't work for some reason
-    // TODO: => why do I not have to close the progressStream after draining the fileStream???
-    // await closeStreams();
-  });
+      // needs to be done to consume the fileStream,
+      // otherwise deno test will crash
+      await drainStream(fileStream);
+    },
+  );
 
   await tc.step(`Returns content size correctly`, async () => {
     const { fileStream, contentLength } = await downstream(
