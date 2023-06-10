@@ -4,7 +4,7 @@
 
 - Improving memory usage measurement for downloading 1 GB file
 - Add a test for downloading a 10 GB file
-- Improve Readme
+- Improve Readme with Usage examples
 
 ## 0.3.2 - 2022-11-08
 
