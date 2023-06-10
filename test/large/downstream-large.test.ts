@@ -12,21 +12,20 @@ import { File10GB } from "@testutils/testfiles.ts";
 import { MemMetrics } from "@testutils/MemMetrics.ts";
 
 Deno.test(`Downloading a 10 GB File should be possible and should not use RAM excessively`, async (tc) => {
-  const { progressStream, fileStream } = await downstream(File1GB);
-  const progressEvents: string[] = [];
-  // const memSamples: number[] = [];
   const memMetrics = new MemMetrics();
   const progressBar = new ProgressBar({
     title: "downloading: ",
     total: 100,
   });
 
+  // Start streaming the file
+  const { progressStream, fileStream } = await downstream(File1GB);
+
   // needs to be done to not crash deno test
   const drainPromise = drainStream(fileStream);
 
   for await (const progress of progressStream) {
     progressBar.render(Number.parseFloat(progress));
-    progressEvents.push(progress);
 
     // samples memory usage in megabytes and calculates some memory metrics,
     // like the average memory usage
@@ -48,7 +47,7 @@ Deno.test(`Downloading a 10 GB File should be possible and should not use RAM ex
 
 Deno.test(`Downloading a 10 GB File should be possible and should not use RAM excessively`, async (tc) => {
   const { progressStream, fileStream } = await downstream(File10GB);
-  const progressEvents: string[] = [];
+
   const memMetrics = new MemMetrics();
   const progressBar = new ProgressBar({
     title: "downloading: ",
@@ -60,7 +59,6 @@ Deno.test(`Downloading a 10 GB File should be possible and should not use RAM ex
 
   for await (const progress of progressStream) {
     progressBar.render(Number.parseFloat(progress));
-    progressEvents.push(progress);
 
     // samples memory usage in megabytes and calculates some memory metrics,
     // like the average memory usage
