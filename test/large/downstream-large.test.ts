@@ -45,25 +45,3 @@ Deno.test(`Downloading 1 GB File should be done without holding full file in mem
 
   await drainPromise;
 });
-
-/**
- * Problem: Still full 1GB File in Memory!
- * https://github.com/denoland/deno/issues/16544
- */
-// await tc.step(`Reports Progress on big file (1GB) correctly`, async () => {
-//   const { progressStream, fileStream } = await downstream(File1GB);
-//   const progressEvents: string[] = [];
-//   const progressBar = new ProgressBar({ title: "downloading: ", total: 100 });
-
-//   // needs to be done to not crash deno test
-//   const drainPromise = drainStream(fileStream);
-
-//   for await (const progress of progressStream) {
-//     progressBar.render(Number.parseFloat(progress));
-//     progressEvents.push(progress);
-//   }
-
-//   await assertSnapshot(tc, progressEvents.length);
-//   // needs to be done to not crash deno test
-//   await drainPromise;
-// });
