@@ -17,20 +17,20 @@ await sleep(0.002);
 
 multibar.render([
   { text: "progress_1", completed: 2 },
-  { text: "progress_2", completed: 1 },
+  { text: "progress_22222", completed: 1 },
 ]);
 
 await sleep(0.002);
 
 multibar.render([
   { text: "progress_1", completed: 2 },
-  { text: "progress_2", completed: 2 },
+  { text: "progress_22222222222222222222222222222222222222222222222222222222222222222", completed: 2 },
 ]);
 
 await sleep(0.002);
 
 multibar.render([
   { text: "progress_1", completed: 3 },
-  { text: "progress_2", completed: 2 },
-  { text: "progress_3", completed: 1 },
+  { text: "progress_22222222222222222222222222222222222222222222222222222222222222222", completed: 2 },
+  { text: "progress_33333", completed: 1 },
 ]);

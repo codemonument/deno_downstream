@@ -1,5 +1,6 @@
 import { multiProgressCliRenderer, simpleProgressCliRenderer } from "@mod";
 import {
+  filter,
   map,
   multiplexSource,
   reduce,
@@ -39,10 +40,12 @@ Deno.test(`Should output multiple progress bars`, async () => {
         }))
       ),
     )
+    .pipeThrough(filter((chunk) => chunk.length === 3))
     .pipeTo(
       // simpleCallbackTarget(
       //   (chunk) => {
-      //     if (chunk.length < 3) console.log(chunk);
+      //     // if (chunk.length < 3)
+      //     console.log(chunk);
       //   },
       // ),
       multiProgressCliRenderer(),

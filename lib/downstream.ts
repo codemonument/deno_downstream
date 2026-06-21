@@ -34,6 +34,7 @@ export async function downstream(
   }
 
   const contentLength = Number.parseInt(
+    // TODO: check out better header for max content length: 
     fileResponse.headers.get("Content-Length") ?? "",
   );
 

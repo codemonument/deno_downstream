@@ -15,7 +15,7 @@ export function multiProgressCliRenderer() {
     title: "Multi-Progress Bars",
     complete: "=",
     incomplete: "-",
-    interval: 1,
+    interval: 0,
     display: "[:bar] :text :percent :time :completed/:total",
   });
 
@@ -24,7 +24,7 @@ export function multiProgressCliRenderer() {
       // do init logic, if needed
     },
     async write(state: MultiProgressState, _controller) {
-      await sleep(0.002);
+      // await sleep(0.002);
       multibar.render(state);
     },
     close() {
